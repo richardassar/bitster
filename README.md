@@ -1,8 +1,10 @@
 # bit$ter
 
+What do you want? How do you want it delivered? What do I get for it?
+
 !["Stick 'em up!"](http://gangster-movies.com/wp-content/uploads/2010/01/gangster-movies-scarface-1932.jpg "Stick 'em up!")
 
->  What do you want? How do you want it delivered? What do I get for it?
+> "As far back as I can remember, I always wanted to be a gangster."
 
 ## About
 
