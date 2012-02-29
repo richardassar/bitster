@@ -27,7 +27,7 @@ Converting single values:
 
 Converting streams:
 
-`bitster.UInt32.Array.Stream.from.String(stringData)` means "Give me an unsigned int32 Stream in Array format from a String.
+`bitster.UInt32.Array.Stream.from.String(stringData)` means "Give me an unsigned int32 Stream in Array format from a String".
 
 ## Types
 
