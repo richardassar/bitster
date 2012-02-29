@@ -193,7 +193,7 @@ bitster.Int16.Number.Stream.from.String = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
-		array[j] = ((string.charCodeAt(i) & 0xFF) << 8 | string.charCodeAt(i + 1) & 0xFF) << 16 >> 16;
+		array[j++] = ((string.charCodeAt(i) & 0xFF) << 8 | string.charCodeAt(i + 1) & 0xFF) << 16 >> 16;
 	}
 
 	return array;
@@ -213,7 +213,7 @@ bitster.UInt16.Number.Stream.from.String = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
-		array[j] = (string.charCodeAt(i) & 0xFF) << 8 | string.charCodeAt(i + 1) & 0xFF;
+		array[j++] = (string.charCodeAt(i) & 0xFF) << 8 | string.charCodeAt(i + 1) & 0xFF;
 	}
 
 	return array;
@@ -234,7 +234,6 @@ bitster.Int32.Number.Stream.from.String = function(string) {
 	var array = new Array(string.length / 4);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
-		console.log(j, i);
 		array[j++] = (string.charCodeAt(i) & 0xFF) << 24 | (string.charCodeAt(i + 1) & 0xFF) << 16 | (string.charCodeAt(i + 2) & 0xFF) << 8 | string.charCodeAt(i + 3) & 0xFF;
 	}
 
