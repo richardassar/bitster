@@ -2,7 +2,7 @@
 
 !["Stick 'em up!"](http://gangster-movies.com/wp-content/uploads/2010/01/gangster-movies-scarface-1932.jpg "Stick 'em up!")
 
-> So what do you want?! How do you want it?! How much you gonna' give me?!
+> So what do you want?! How do you want it?! What are you gonna give me?!
 
 ## About
 
@@ -14,7 +14,7 @@ That's...
 
 * What do you want? ... `bitster.UInt32` 
 * How you want it? ... `bitster.UInt32.Number` 
-* What you gonna give me? ... `bitster.UInt32.Number.from.String`
+* What are you gonna give me? ... `bitster.UInt32.Number.from.String`
 
 Simple.
 
