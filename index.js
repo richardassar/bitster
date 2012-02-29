@@ -1,1 +1,1 @@
-module.exports = require("./dist/bitster.js");
+module.exports = require("./dist/bitster.min.js");
