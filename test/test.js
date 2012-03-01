@@ -4,7 +4,19 @@ var
 	assert = chai.assert;
 
 // TODO: Move into proto project
-Array.prototype.equals = function(val) { return val instanceof Array && !(this<val || val<this); };
+Array.prototype.equals = function(val) { 
+	if(this.length != val.length) {
+		return false;
+	}
+
+	for(var i = 0, len = this.length; i < len; ++i) {
+		if(this[i] != val[i]) {
+			return false;
+		}
+	}
+	
+	return true;
+};
 
 suite("Array", function() {
 	test("equals", function() {
