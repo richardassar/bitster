@@ -11,7 +11,6 @@ clean:
 	rm -rf dist/ node_modules/
 
 test: dist/bitster.min.js
-	npm install -d
-	@./node_modules/.bin/mocha --reporter list
+	@./node_modules/.bin/mocha --reporter spec -u tdd
 
 .PHONY: test clean
