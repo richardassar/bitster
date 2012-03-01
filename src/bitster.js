@@ -121,11 +121,11 @@ bitster.UInt16_LE.String.from.Number = function(number) { return String.fromChar
 bitster.UInt8.String.from.Number     = function(number) { return String.fromCharCode(number & 0xFF); };
 
 //
-bitster.UInt32.String.from.Array    = function(number) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF, array[2] & 0xFF, array[3] & 0xFF); };
-bitster.UInt32_LE.String.from.Array = function(number) { return String.fromCharCode(array[3] & 0xFF, array[2] & 0xFF, array[1] & 0xFF, array[0] & 0xFF); };
-bitster.UInt16.String.from.Array    = function(number) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF); };
-bitster.UInt16_LE.String.from.Array = function(number) { return String.fromCharCode(array[1] & 0xFF, array[0] & 0xFF); };
-bitster.UInt8.String.from.Array     = function(number) { return String.fromCharCode(array[0] & 0xFF); };
+bitster.UInt32.String.from.Array    = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF, array[2] & 0xFF, array[3] & 0xFF); };
+bitster.UInt32_LE.String.from.Array = function(array) { return String.fromCharCode(array[3] & 0xFF, array[2] & 0xFF, array[1] & 0xFF, array[0] & 0xFF); };
+bitster.UInt16.String.from.Array    = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF); };
+bitster.UInt16_LE.String.from.Array = function(array) { return String.fromCharCode(array[1] & 0xFF, array[0] & 0xFF); };
+bitster.UInt8.String.from.Array     = function(array) { return String.fromCharCode(array[0] & 0xFF); };
 
 //
 bitster.Int32.Number.from.String    = function(string) { return (string.charCodeAt(0) & 0xFF) << 24 | (string.charCodeAt(1) & 0xFF) << 16 | (string.charCodeAt(2) & 0xFF) << 8 | string.charCodeAt(3) & 0xFF; };
