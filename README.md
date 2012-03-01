@@ -31,7 +31,7 @@ bit$ter attempts to alleviate that pain with a shotgun, **no**... tommy gun, app
 Converting single values:
 
 `bitster.UInt16.Number.from.String(stringData)` means "Give me an unsigned int16 in Number format from a String".
-`bitster.Int32_LE.String.from.Array(arrayData)` means "Give me an signed little-endian int32 in String format from an Array".
+`bitster.Int32_LE.Number.from.Array(arrayData)` means "Give me an signed little-endian int32 in Number format from an Array".
 
 Converting streams:
 
