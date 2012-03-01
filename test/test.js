@@ -4,12 +4,12 @@ var
 	assert = chai.assert;
 
 // TODO: Move into proto project
-Array.prototype.equals = function(val) { 
-	if(this.length != val.length) {
+Array.prototype.equals = function(val) { 	
+	if(!val || !(val instanceof Array) || this.length != val.length) {
 		return false;
 	}
 
-	for(var i = 0, len = this.length; i < len; ++i) {
+	for(var i = 0, len = this.length; i < len; ++i) {		
 		if(this[i] != val[i]) {
 			return false;
 		}
@@ -19,11 +19,11 @@ Array.prototype.equals = function(val) {
 };
 
 suite("Array", function() {
-	test("equals", function() {
-		assert.ok([1,2,3].equals([1,2,3]));
-		assert.ok(![1,2,4].equals([1,2,3]));
-		assert.ok(![1,2,4].equals(undefined));
-		assert.ok(![1,2,4].equals(null));
+	suite("equals", function() {
+		test("equal arrays are equal", function() { assert.ok([1,2,3].equals([1,2,3])); });
+		test("unequals arrays are not equal", function() { assert.ok(![1,2,4].equals([1,2,3])); });
+		test("arrays are not equal to undefined", function() { assert.ok(![1,2,4].equals(undefined)); });
+		test("arrays are not equal to null", function() { assert.ok(![1,2,4].equals(null)); });
 	});	
 });
 
