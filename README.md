@@ -1,5 +1,7 @@
 # bit$ter
 
+**IMPORTANT** Docs require updating, please ignore content below until this notice disappears.
+
 So what do you want? How do you want it delivered? What do I get for it?
 
 !["Stick 'em up!"](http://gangster-movies.com/wp-content/uploads/2010/01/gangster-movies-scarface-1932.jpg "Stick 'em up!")
@@ -11,8 +13,6 @@ So what do you want? How do you want it delivered? What do I get for it?
 bit$ter is a binary transcoding utility module which converts binary data between native JavaScript data-types and supports single values and streams.
 
 Say what data type you want, how you want it, what input data type you will be providing and bit$ter will do the rest.
-
-**IMPORTANT** Since the last edit the docs and tests are out of date, until test cases are rewritten project state is deemed unstable.
 
 That's... 
 

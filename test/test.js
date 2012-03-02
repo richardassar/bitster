@@ -165,7 +165,7 @@ suite("bitster", function() {
 		});
 
 		suite("Raw", function() {
-			test("String from Array", function() { assert.ok(bitster.Raw.Byte.String.Stream.from.Byte.Array.Byte([119, 136, 153, 255]) == String.fromCharCode(119, 136, 153, 255)); });
+			test("String from Array", function() { assert.ok(bitster.Raw.Byte.String.Stream.from.Byte.Array.Stream([119, 136, 153, 255]) == String.fromCharCode(119, 136, 153, 255)); });
 			test("Array from String", function() { assert.ok(bitster.Raw.Byte.Array.Stream.from.Byte.String.Stream(String.fromCharCode(119, 136, 153, 255)).equals([119, 136, 153, 255])); });
 		});
 	});

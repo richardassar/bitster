@@ -360,7 +360,7 @@ bitster.Long.Array.Stream.from.Long.String.Stream = function(stringStream) {
 };
 
 //
-bitster.Raw.Byte.String.Stream.from.Byte.Array.Byte = function(arrayStream) {
+bitster.Raw.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
 	var string = '';
 	
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
