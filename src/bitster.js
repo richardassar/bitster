@@ -299,33 +299,33 @@ bitster.Unsigned.Number.Stream.from.LE.Long.Array.Stream = function(arrayStream)
 
 //
 bitster.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
-	var string = '';	
+	var stringStream = '';	
 	
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
-		string += String.fromCharCode(arrayStream[i][0] & 0xFF);
+		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF);
 	}
 
-	return string;
+	return stringStream;
 };
 
 bitster.Short.String.Stream.from.Short.Array.Stream = function(arrayStream) {
-	var string = '';	
+	var stringStream = '';	
 	
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
-		string += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF);
+		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF);
 	}
 
-	return string;
+	return stringStream;
 };
 
 bitster.Long.String.Stream.from.Long.Array.Stream = function(arrayStream) {
-	var string = '';	
+	var stringStream = '';	
 	
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
-		string += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF) + String.fromCharCode(arrayStream[i][2] & 0xFF) + String.fromCharCode(arrayStream[i][3] & 0xFF);
+		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF) + String.fromCharCode(arrayStream[i][2] & 0xFF) + String.fromCharCode(arrayStream[i][3] & 0xFF);
 	}
 
-	return string;
+	return stringStream;
 };
 
 //
