@@ -1,7 +1,7 @@
 // Utility to generate a namespace decleration from the bitster source.
 var fs = require("fs");
 
-var bitster = fs.readFileSync('../src/bitster.js').toString();
+var bitster = fs.readFileSync(__dirname + '/../src/bitster.js').toString();
 
 var lines = bitster.split('\n');
 
@@ -25,4 +25,4 @@ lines.forEach(function(line) {
 	}
 });
 
-console.log("var bitster = " + JSON.stringify(root).replace(/"/g, '') + ";");
+console.log("var bitster = " + JSON.stringify(root).replace(/"/g, '') + ";\n");
