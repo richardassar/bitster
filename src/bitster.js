@@ -1,174 +1,68 @@
-//
-var bitster = {};
+// Dont fsck with the bit$ter
+var bitster = {Number:{from:{Long:{String:{},Array:{}},LE:{Long:{String:{},Array:{}},Short:{String:{},Array:{}},Unsigned:{Long:{String:{},Array:{}},Short:{String:{},Array:{}}}},Short:{String:{},Array:{}},Byte:{String:{},Array:{}},Unsigned:{Long:{String:{},Array:{}},Short:{String:{},Array:{}},Byte:{String:{},Array:{}}}},Stream:{from:{Byte:{String:{Stream:{}}},Unsigned:{Byte:{String:{Stream:{}}},Short:{String:{Stream:{}}},Long:{String:{Stream:{}}}},Short:{String:{Stream:{}}},LE:{Short:{String:{Stream:{}}},Unsigned:{Short:{String:{Stream:{}}},Long:{String:{Stream:{}}}},Long:{String:{Stream:{}}}},Long:{String:{Stream:{}}}}}},Long:{String:{from:{Number:{},Array:{}},Stream:{from:{Array:{Stream:{}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{String:{Stream:{}}}}}},LE:{Long:{String:{from:{Number:{},Array:{},LE:{Long:{Array:{}}}},Stream:{from:{Array:{Stream:{}},LE:{Array:{Stream:{}}}}}},Array:{from:{Number:{},String:{},LE:{Long:{String:{}}}},Stream:{from:{String:{Stream:{}}}}}},Short:{String:{from:{Number:{},Array:{},LE:{Short:{Array:{}}}},Stream:{from:{Array:{Stream:{}},LE:{Array:{Stream:{}}}}}},Array:{from:{Number:{},String:{},LE:{Short:{String:{}}}},Stream:{from:{String:{Stream:{}}}}}}},Short:{String:{from:{Number:{},Array:{}},Stream:{from:{Array:{Stream:{}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{String:{Stream:{}}}}}},Byte:{String:{from:{Number:{},Array:{}},Stream:{from:{Array:{Stream:{}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{String:{Stream:{}}}}}},Raw:{String:{Stream:{from:{Array:{}}}},Array:{Stream:{from:{String:{}}}}}}
 
 //
-bitster.Int8 = {};
-bitster.Int16 = {};
-bitster.Int16_LE = {};
-bitster.Int32 = {};
-bitster.Int32_LE = {};
-bitster.UInt8 = {};
-bitster.UInt16 = {};
-bitster.UInt16_LE = {};
-bitster.UInt32 = {};
-bitster.UInt32_LE = {};
+bitster.Number.from.Long.String     = function(string) { return (string.charCodeAt(0) & 0xFF) << 24 | (string.charCodeAt(1) & 0xFF) << 16 | (string.charCodeAt(2) & 0xFF) << 8 | string.charCodeAt(3) & 0xFF; };
+bitster.Number.from.LE.Long.String  = function(string) { return (string.charCodeAt(3) & 0xFF) << 24 | (string.charCodeAt(2) & 0xFF) << 16 | (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF; };
+bitster.Number.from.Short.String    = function(string) { return ((string.charCodeAt(0) & 0xFF) << 8 | string.charCodeAt(1) & 0xFF) << 16 >> 16; };
+bitster.Number.from.LE.Short.String = function(string) { return ((string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF) << 16 >> 16; };
+bitster.Number.from.Byte.String     = function(string) { return (string.charCodeAt(0) & 0xFF) << 24 >> 24; };
+
+
+bitster.Number.from.Unsigned.Long.String     = function(string) { return ((string.charCodeAt(0) & 0xFF) << 24 | (string.charCodeAt(1) & 0xFF) << 16 | (string.charCodeAt(2) & 0xFF) << 8 | string.charCodeAt(3) & 0xFF) >>> 0; };
+bitster.Number.from.LE.Unsigned.Long.String  = function(string) { return ((string.charCodeAt(3) & 0xFF) << 24 | (string.charCodeAt(2) & 0xFF) << 16 | (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF) >>> 0; };
+bitster.Number.from.Unsigned.Short.String    = function(string) { return (string.charCodeAt(0) & 0xFF) << 8 | string.charCodeAt(1) & 0xFF; };
+bitster.Number.from.LE.Unsigned.Short.String = function(string) { return (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF; };
+bitster.Number.from.Unsigned.Byte.String     = function(string) { return string.charCodeAt(0) & 0xFF; };
+
+bitster.Number.from.Long.Array     = function(array) { return (array[0] & 0xFF) << 24 | (array[1] & 0xFF) << 16 | (array[2] & 0xFF) << 8 | array[3] & 0xFF; };
+bitster.Number.from.LE.Long.Array  = function(array) { return (array[3] & 0xFF) << 24 | (array[2] & 0xFF) << 16 | (array[1] & 0xFF) << 8 | array[0] & 0xFF; };
+bitster.Number.from.Short.Array    = function(array) { return ((array[0] & 0xFF) << 8 | array[1] & 0xFF) << 16 >> 16; };
+bitster.Number.from.LE.Short.Array = function(array) { return ((array[1] & 0xFF) << 8 | array[0] & 0xFF) << 16 >> 16; };
+bitster.Number.from.Byte.Array     = function(array) { return (array[0] & 0xFF) << 24 >> 24; };
+
+bitster.Number.from.Unsigned.Long.Array     = function(array) { return ((array[0] & 0xFF) << 24 | (array[1] & 0xFF) << 16 | (array[2] & 0xFF) << 8 | array[3] & 0xFF) >>> 0; };
+bitster.Number.from.LE.Unsigned.Long.Array  = function(array) { return ((array[3] & 0xFF) << 24 | (array[2] & 0xFF) << 16 | (array[1] & 0xFF) << 8 | array[0] & 0xFF) >>> 0; };
+bitster.Number.from.Unsigned.Short.Array    = function(array) { return (array[0] & 0xFF) << 8 | array[1] & 0xFF; };
+bitster.Number.from.LE.Unsigned.Short.Array = function(array) { return (array[1] & 0xFF) << 8 | array[0] & 0xFF; };
+bitster.Number.from.Unsigned.Byte.Array     = function(array) { return array[0] & 0xFF; };
 
 //
-bitster.UInt8.String = {};
-bitster.UInt16.String = {};
-bitster.UInt16_LE.String = {};
-bitster.UInt32.String = {};
-bitster.UInt32_LE.String = {};
-
-bitster.UInt8.Array = {};
-bitster.UInt16.Array = {};
-bitster.UInt16_LE.Array = {};
-bitster.UInt32.Array = {};
-bitster.UInt32_LE.Array = {};
-
-bitster.Int8.Number = {};
-bitster.Int16.Number = {};
-bitster.Int16_LE.Number = {};
-bitster.Int32.Number = {};
-bitster.Int32_LE.Number = {};
-
-bitster.UInt8.Number = {};
-bitster.UInt16.Number = {};
-bitster.UInt16_LE.Number = {};
-bitster.UInt32.Number = {};
-bitster.UInt32_LE.Number = {};
+bitster.Long.String.from.Number     = function(number) { return String.fromCharCode(number >> 24 & 0xFF, number >> 16 & 0xFF, number >> 8 & 0xFF, number & 0xFF); };
+bitster.LE.Long.String.from.Number  = function(number) { return String.fromCharCode(number & 0xFF, number >> 8 & 0xFF, number >> 16 & 0xFF, number >> 24 & 0xFF); };
+bitster.Short.String.from.Number    = function(number) { return String.fromCharCode(number >> 8 & 0xFF, number & 0xFF); };
+bitster.LE.Short.String.from.Number = function(number) { return String.fromCharCode(number & 0xFF, number >> 8 & 0xFF); };
+bitster.Byte.String.from.Number     = function(number) { return String.fromCharCode(number & 0xFF); };
 
 //
-bitster.UInt8.String.from = {};
-bitster.UInt16.String.from = {};
-bitster.UInt16_LE.String.from = {};
-bitster.UInt32.String.from = {};
-bitster.UInt32_LE.String.from = {};
+bitster.Long.String.from.Array     = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF, array[2] & 0xFF, array[3] & 0xFF); };
+bitster.LE.Long.String.from.Array  = function(array) { return String.fromCharCode(array[3] & 0xFF, array[2] & 0xFF, array[1] & 0xFF, array[0] & 0xFF); };
+bitster.Short.String.from.Array    = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF); };
+bitster.LE.Short.String.from.Array = function(array) { return String.fromCharCode(array[1] & 0xFF, array[0] & 0xFF); };
+bitster.Byte.String.from.Array     = function(array) { return String.fromCharCode(array[0] & 0xFF); };
 
-bitster.UInt8.Array.from = {};
-bitster.UInt16.Array.from = {};
-bitster.UInt16_LE.Array.from = {};
-bitster.UInt32.Array.from = {};
-bitster.UInt32_LE.Array.from = {};
-
-bitster.Int8.Number.from = {};
-bitster.Int16.Number.from = {};
-bitster.Int16_LE.Number.from = {};
-bitster.Int32.Number.from = {};
-bitster.Int32_LE.Number.from = {};
-
-bitster.UInt8.Number.from = {};
-bitster.UInt16.Number.from = {};
-bitster.UInt16_LE.Number.from = {};
-bitster.UInt32.Number.from = {};
-bitster.UInt32_LE.Number.from = {};
+bitster.LE.Long.String.from.LE.Long.Array   = bitster.Long.String.from.Array;
+bitster.LE.Short.String.from.LE.Short.Array = bitster.Short.String.from.Array;
 
 //
-bitster.UInt8.String.Stream = {};
-bitster.UInt16.String.Stream = {};
-bitster.UInt16_LE.String.Stream = {};
-bitster.UInt32.String.Stream = {};
-bitster.UInt32_LE.String.Stream = {};
-
-bitster.UInt8.Array.Stream = {};
-bitster.UInt16.Array.Stream = {};
-bitster.UInt16_LE.Array.Stream = {};
-bitster.UInt32.Array.Stream = {};
-bitster.UInt32_LE.Array.Stream = {};
-
-bitster.Int8.Number.Stream = {};
-bitster.Int16.Number.Stream = {};
-bitster.Int16_LE.Number.Stream = {};
-bitster.Int32.Number.Stream = {};
-bitster.Int32_LE.Number.Stream = {};
-
-bitster.UInt8.Number.Stream = {};
-bitster.UInt16.Number.Stream = {};
-bitster.UInt16_LE.Number.Stream = {};
-bitster.UInt32.Number.Stream = {};
-bitster.UInt32_LE.Number.Stream = {};
+bitster.Long.Array.from.Number     = function(number) { return [number >> 24 & 0xFF, number >> 16 & 0xFF, number >> 8 & 0xFF, number & 0xFF]; };
+bitster.LE.Long.Array.from.Number  = function(number) { return [number & 0xFF, number >> 8 & 0xFF, number >> 16 & 0xFF, number >> 24 & 0xFF]; };
+bitster.Short.Array.from.Number    = function(number) { return [number >> 8 & 0xFF, number & 0xFF]; };
+bitster.LE.Short.Array.from.Number = function(number) { return [number & 0xFF, number >> 8 & 0xFF]; };
+bitster.Byte.Array.from.Number     = function(number) { return [number & 0xFF]; };
 
 //
-bitster.UInt8.String.Stream.from = {};
-bitster.UInt16.String.Stream.from = {};
-bitster.UInt16_LE.String.Stream.from = {};
-bitster.UInt32.String.Stream.from = {};
-bitster.UInt32_LE.String.Stream.from = {};
+bitster.Long.Array.from.String     = function(string) { return [string.charCodeAt(0) & 0xFF, string.charCodeAt(1) & 0xFF, string.charCodeAt(2) & 0xFF, string.charCodeAt(3) & 0xFF]; };
+bitster.LE.Long.Array.from.String  = function(string) { return [string.charCodeAt(3) & 0xFF, string.charCodeAt(2) & 0xFF, string.charCodeAt(1) & 0xFF, string.charCodeAt(0) & 0xFF]; };
+bitster.Short.Array.from.String    = function(string) { return [string.charCodeAt(0) & 0xFF, string.charCodeAt(1) & 0xFF]; };
+bitster.LE.Short.Array.from.String = function(string) { return [string.charCodeAt(1) & 0xFF, string.charCodeAt(0) & 0xFF]; };
+bitster.Byte.Array.from.String     = function(string) { return [string.charCodeAt(0) & 0xFF]; };
 
-bitster.UInt8.Array.Stream.from = {};
-bitster.UInt16.Array.Stream.from = {};
-bitster.UInt16_LE.Array.Stream.from = {};
-bitster.UInt32.Array.Stream.from = {};
-bitster.UInt32_LE.Array.Stream.from = {};
-
-bitster.Int8.Number.Stream.from = {};
-bitster.Int16.Number.Stream.from = {};
-bitster.Int16_LE.Number.Stream.from = {};
-bitster.Int32.Number.Stream.from = {};
-bitster.Int32_LE.Number.Stream.from = {};
-
-bitster.UInt8.Number.Stream.from = {};
-bitster.UInt16.Number.Stream.from = {};
-bitster.UInt16_LE.Number.Stream.from = {};
-bitster.UInt32.Number.Stream.from = {};
-bitster.UInt32_LE.Number.Stream.from = {};
+bitster.LE.Long.Array.from.LE.Long.String   = bitster.Long.Array.from.String;
+bitster.LE.Short.Array.from.LE.Short.String = bitster.Short.Array.from.String;
 
 //
-bitster.UInt32.String.from.Number    = function(number) { return String.fromCharCode(number >> 24 & 0xFF, number >> 16 & 0xFF, number >> 8 & 0xFF, number & 0xFF); };
-bitster.UInt32_LE.String.from.Number = function(number) { return String.fromCharCode(number & 0xFF, number >> 8 & 0xFF, number >> 16 & 0xFF, number >> 24 & 0xFF); };
-bitster.UInt16.String.from.Number    = function(number) { return String.fromCharCode(number >> 8 & 0xFF, number & 0xFF); };
-bitster.UInt16_LE.String.from.Number = function(number) { return String.fromCharCode(number & 0xFF, number >> 8 & 0xFF); };
-bitster.UInt8.String.from.Number     = function(number) { return String.fromCharCode(number & 0xFF); };
-
-//
-bitster.UInt32.String.from.Array    = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF, array[2] & 0xFF, array[3] & 0xFF); };
-bitster.UInt32_LE.String.from.Array = function(array) { return String.fromCharCode(array[3] & 0xFF, array[2] & 0xFF, array[1] & 0xFF, array[0] & 0xFF); };
-bitster.UInt16.String.from.Array    = function(array) { return String.fromCharCode(array[0] & 0xFF, array[1] & 0xFF); };
-bitster.UInt16_LE.String.from.Array = function(array) { return String.fromCharCode(array[1] & 0xFF, array[0] & 0xFF); };
-bitster.UInt8.String.from.Array     = function(array) { return String.fromCharCode(array[0] & 0xFF); };
-
-//
-bitster.Int32.Number.from.String    = function(string) { return (string.charCodeAt(0) & 0xFF) << 24 | (string.charCodeAt(1) & 0xFF) << 16 | (string.charCodeAt(2) & 0xFF) << 8 | string.charCodeAt(3) & 0xFF; };
-bitster.Int32_LE.Number.from.String = function(string) { return (string.charCodeAt(3) & 0xFF) << 24 | (string.charCodeAt(2) & 0xFF) << 16 | (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF; };
-bitster.Int16.Number.from.String    = function(string) { return ((string.charCodeAt(0) & 0xFF) << 8 | string.charCodeAt(1) & 0xFF) << 16 >> 16; };
-bitster.Int16_LE.Number.from.String = function(string) { return ((string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF) << 16 >> 16; };
-bitster.Int8.Number.from.String     = function(string) { return (string.charCodeAt(0) & 0xFF) << 24 >> 24; };
-
-bitster.UInt32.Number.from.String    = function(string) { return ((string.charCodeAt(0) & 0xFF) << 24 | (string.charCodeAt(1) & 0xFF) << 16 | (string.charCodeAt(2) & 0xFF) << 8 | string.charCodeAt(3) & 0xFF) >>> 0; };
-bitster.UInt32_LE.Number.from.String = function(string) { return ((string.charCodeAt(3) & 0xFF) << 24 | (string.charCodeAt(2) & 0xFF) << 16 | (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF) >>> 0; };
-bitster.UInt16.Number.from.String    = function(string) { return (string.charCodeAt(0) & 0xFF) << 8 | string.charCodeAt(1) & 0xFF; };
-bitster.UInt16_LE.Number.from.String = function(string) { return (string.charCodeAt(1) & 0xFF) << 8 | string.charCodeAt(0) & 0xFF; };
-bitster.UInt8.Number.from.String     = function(string) { return string.charCodeAt(0) & 0xFF; };
-
-//
-bitster.Int32.Number.from.Array    = function(array) { return (array[0] & 0xFF) << 24 | (array[1] & 0xFF) << 16 | (array[2] & 0xFF) << 8 | array[3] & 0xFF; };
-bitster.Int32_LE.Number.from.Array = function(array) { return (array[3] & 0xFF) << 24 | (array[2] & 0xFF) << 16 | (array[1] & 0xFF) << 8 | array[0] & 0xFF; };
-bitster.Int16.Number.from.Array    = function(array) { return ((array[0] & 0xFF) << 8 | array[1] & 0xFF) << 16 >> 16; };
-bitster.Int16_LE.Number.from.Array = function(array) { return ((array[1] & 0xFF) << 8 | array[0] & 0xFF) << 16 >> 16; };
-bitster.Int8.Number.from.Array     = function(array) { return (array[0] & 0xFF) << 24 >> 24; };
-
-bitster.UInt32.Number.from.Array    = function(array) { return ((array[0] & 0xFF) << 24 | (array[1] & 0xFF) << 16 | (array[2] & 0xFF) << 8 | array[3] & 0xFF) >>> 0; };
-bitster.UInt32_LE.Number.from.Array = function(array) { return ((array[3] & 0xFF) << 24 | (array[2] & 0xFF) << 16 | (array[1] & 0xFF) << 8 | array[0] & 0xFF) >>> 0; };
-bitster.UInt16.Number.from.Array    = function(array) { return (array[0] & 0xFF) << 8 | array[1] & 0xFF; };
-bitster.UInt16_LE.Number.from.Array = function(array) { return (array[1] & 0xFF) << 8 | array[0] & 0xFF; };
-bitster.UInt8.Number.from.Array     = function(array) { return array[0] & 0xFF; };
-
-//
-bitster.UInt32.Array.from.Number    = function(number) { return [number >> 24 & 0xFF, number >> 16 & 0xFF, number >> 8 & 0xFF, number & 0xFF]; };
-bitster.UInt32_LE.Array.from.Number = function(number) { return [number & 0xFF, number >> 8 & 0xFF, number >> 16 & 0xFF, number >> 24 & 0xFF]; };
-bitster.UInt16.Array.from.Number    = function(number) { return [number >> 8 & 0xFF, number & 0xFF]; };
-bitster.UInt16_LE.Array.from.Number = function(number) { return [number & 0xFF, number >> 8 & 0xFF]; };
-bitster.UInt8.Array.from.Number     = function(number) { return [number & 0xFF]; };
-
-//
-bitster.UInt32.Array.from.String    = function(string) { return [string.charCodeAt(0) & 0xFF, string.charCodeAt(1) & 0xFF, string.charCodeAt(2) & 0xFF, string.charCodeAt(3) & 0xFF]; };
-bitster.UInt32_LE.Array.from.String = function(string) { return [string.charCodeAt(3) & 0xFF, string.charCodeAt(2) & 0xFF, string.charCodeAt(1) & 0xFF, string.charCodeAt(0) & 0xFF]; };
-bitster.UInt16.Array.from.String    = function(string) { return [string.charCodeAt(0) & 0xFF, string.charCodeAt(1) & 0xFF]; };
-bitster.UInt16_LE.Array.from.String = function(string) { return [string.charCodeAt(1) & 0xFF, string.charCodeAt(0) & 0xFF]; };
-bitster.UInt8.Array.from.String     = function(string) { return [string.charCodeAt(0) & 0xFF]; };
-
-//
-bitster.Int8.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Byte.String.Stream = function(string) {
 	var array = new Array(string.length);	
 	
 	for(var i = 0, len = array.length; i < len; ++i) {
@@ -178,7 +72,7 @@ bitster.Int8.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.UInt8.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Unsigned.Byte.String.Stream = function(string) {
 	var array = new Array(string.length);	
 	
 	for(var i = 0, len = array.length; i < len; ++i) {
@@ -189,7 +83,7 @@ bitster.UInt8.Number.Stream.from.String = function(string) {
 };
 
 //
-bitster.Int16.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Short.String.Stream = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
@@ -199,7 +93,7 @@ bitster.Int16.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.Int16_LE.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.LE.Short.String.Stream = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
@@ -209,7 +103,7 @@ bitster.Int16_LE.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.UInt16.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Unsigned.Short.String.Stream = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
@@ -219,7 +113,7 @@ bitster.UInt16.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.UInt16_LE.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.LE.Unsigned.Short.String.Stream = function(string) {
 	var array = new Array(string.length / 2);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
@@ -230,7 +124,7 @@ bitster.UInt16_LE.Number.Stream.from.String = function(string) {
 };
 
 //
-bitster.Int32.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Long.String.Stream = function(string) {
 	var array = new Array(string.length / 4);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
@@ -240,7 +134,7 @@ bitster.Int32.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.Int32_LE.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.LE.Long.String.Stream = function(string) {
 	var array = new Array(string.length / 4);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
@@ -250,7 +144,7 @@ bitster.Int32_LE.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.UInt32.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.Unsigned.Long.String.Stream = function(string) {
 	var array = new Array(string.length / 4);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
@@ -260,7 +154,7 @@ bitster.UInt32.Number.Stream.from.String = function(string) {
 	return array;
 };
 
-bitster.UInt32_LE.Number.Stream.from.String = function(string) {
+bitster.Number.Stream.from.LE.Unsigned.Long.String.Stream = function(string) {
 	var array = new Array(string.length / 4);	
 	
 	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
@@ -271,8 +165,114 @@ bitster.UInt32_LE.Number.Stream.from.String = function(string) {
 };
 
 //
-bitster.UInt8.String.Stream.from.Array = function(array) {
+bitster.Byte.String.Stream.from.Array.Stream = function(array) {
 	var string = '';	
+	
+	for(var i = 0, len = array.length; i < len; ++i) {
+		string += String.fromCharCode(array[i][0] & 0xFF);
+	}
+
+	return string;
+};
+
+bitster.Short.String.Stream.from.Array.Stream = function(array) {
+	var string = '';	
+	
+	for(var i = 0, len = array.length; i < len; i += 2) {
+		string += String.fromCharCode(array[i][0] & 0xFF) + String.fromCharCode(array[i][1] & 0xFF);
+	}
+
+	return string;
+};
+
+bitster.LE.Short.String.Stream.from.Array.Stream = function(array) {
+	var string = '';	
+	
+	for(var i = 0, len = array.length; i < len; i += 2) {
+		string += String.fromCharCode(array[i][1] & 0xFF) + String.fromCharCode(array[i][0] & 0xFF);
+	}
+
+	return string;
+};
+
+bitster.LE.Short.String.Stream.from.LE.Array.Stream = bitster.Short.String.Stream.from.Array.Stream;
+
+bitster.Long.String.Stream.from.Array.Stream = function(array) {
+	var string = '';	
+	
+	for(var i = 0, len = array.length; i < len; i += 4) {
+		string += String.fromCharCode(array[i][0] & 0xFF) + String.fromCharCode(array[i][1] & 0xFF) + String.fromCharCode(array[i][2] & 0xFF) + String.fromCharCode(array[i][3] & 0xFF);
+	}
+
+	return string;
+};
+
+bitster.LE.Long.String.Stream.from.Array.Stream = function(array) {
+	var string = '';	
+	
+	for(var i = 0, len = array.length; i < len; i += 4) {
+		string += String.fromCharCode(array[i][3] & 0xFF) + String.fromCharCode(array[i][2] & 0xFF) + String.fromCharCode(array[i][1] & 0xFF) + String.fromCharCode(array[i][0] & 0xFF);
+	}
+
+	return string;
+};
+
+bitster.LE.Long.String.Stream.from.LE.Array.Stream = bitster.Long.String.Stream.from.Array.Stream;
+
+//
+bitster.Byte.Array.Stream.from.String.Stream = function(string) {
+	var array = new Array(string.length);	
+	
+	for(var i = 0, len = array.length; i < len; ++i) {
+		array[i] = [string.charCodeAt(i) & 0xFF];
+	}
+
+	return array;
+};
+
+bitster.Short.Array.Stream.from.String.Stream = function(string) {
+	var array = new Array(string.length / 2);	
+	
+	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
+		array[j++] = [string.charCodeAt(i) & 0xFF, string.charCodeAt(i + 1) & 0xFF];
+	}
+
+	return array;
+};
+
+bitster.LE.Short.Array.Stream.from.String.Stream = function(string) {
+	var array = new Array(string.length / 2);	
+	
+	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
+		array[j++] = [string.charCodeAt(i + 1) & 0xFF, string.charCodeAt(i) & 0xFF];
+	}
+
+	return array;
+};
+
+bitster.Long.Array.Stream.from.String.Stream = function(string) {
+	var array = new Array(string.length / 4);	
+	
+	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
+		array[j++] = [string.charCodeAt(i) & 0xFF, string.charCodeAt(i + 1) & 0xFF, string.charCodeAt(i + 2) & 0xFF, string.charCodeAt(i + 3) & 0xFF];
+	}
+
+	return array;
+};
+
+bitster.LE.Long.Array.Stream.from.String.Stream = function(string) {
+	var array = new Array(string.length / 4);	
+	
+	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
+		array[j++] = [string.charCodeAt(i + 3) & 0xFF, string.charCodeAt(i + 2) & 0xFF, string.charCodeAt(i + 1) & 0xFF, string.charCodeAt(i) & 0xFF];
+	}
+
+	return array;
+};
+
+//
+bitster.Raw.String.Stream.from.Array = function(array) {
+	var string = '';
 	
 	for(var i = 0, len = array.length; i < len; ++i) {
 		string += String.fromCharCode(array[i] & 0xFF);
@@ -281,85 +281,11 @@ bitster.UInt8.String.Stream.from.Array = function(array) {
 	return string;
 };
 
-//
-bitster.UInt16.String.Stream.from.Array = function(array) {
-	var string = '';	
+bitster.Raw.Array.Stream.from.String = function(string) {
+	var array = new Array(string.length);	
 	
-	for(var i = 0, len = array.length; i < len; i += 2) {
-		string += String.fromCharCode(array[i] & 0xFF) + string.fromCharCode(array[i + 1] & 0xFF) ;
-	}
-
-	return string;
-};
-
-bitster.UInt16_LE.String.Stream.from.Array = function(array) {
-	var string = '';	
-	
-	for(var i = 0, len = array.length; i < len; i += 2) {
-		string += String.fromCharCode(array[i + 1] & 0xFF) + string.fromCharCode(array[i] & 0xFF) ;
-	}
-
-	return string;
-};
-
-//
-bitster.UInt32.String.Stream.from.Array = function(array) {
-	var string = '';	
-	
-	for(var i = 0, len = array.length; i < len; i += 4) {
-		string += String.fromCharCode(array[i] & 0xFF) + string.fromCharCode(array[i + 1] & 0xFF) + string.fromCharCode(array[i + 2] & 0xFF) + string.fromCharCode(array[i + 3] & 0xFF);
-	}
-
-	return string;
-};
-
-bitster.UInt32_LE.String.Stream.from.Array = function(array) {
-	var string = '';	
-	
-	for(var i = 0, len = array.length; i < len; i += 4) {
-		string += String.fromCharCode(array[i + 3] & 0xFF) + string.fromCharCode(array[i + 2] & 0xFF) + string.fromCharCode(array[i + 1] & 0xFF) + string.fromCharCode(array[i] & 0xFF);
-	}
-
-	return string;
-};
-
-//
-bitster.UInt16.Array.Stream.from.String = function(array) {
-	var array = new Array(string.length / 2);	
-	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
-		array[j++] = [(string.charCodeAt(i) & 0xFF) << 8, string.charCodeAt(i + 1) & 0xFF];
-	}
-
-	return array;
-};
-
-bitster.UInt16_LE.Array.Stream.from.String = function(array) {
-	var array = new Array(string.length / 2);	
-	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
-		array[j++] = [(string.charCodeAt(i + 1) & 0xFF) << 8, string.charCodeAt(i) & 0xFF];
-	}
-
-	return array;
-};
-
-//
-bitster.UInt32.Array.Stream.from.String = function(array) {
-	var array = new Array(string.length / 4);	
-	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
-		array[j++] = [(string.charCodeAt(i) & 0xFF) << 24, (string.charCodeAt(i + 1) & 0xFF) << 16, (string.charCodeAt(i + 2) & 0xFF) << 8, string.charCodeAt(i + 3) & 0xFF];
-	}
-
-	return array;
-};
-
-bitster.UInt32_LE.Array.Stream.from.String = function(array) {
-	var array = new Array(string.length / 4);	
-	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
-		array[j++] = [(string.charCodeAt(i + 3) & 0xFF) << 24, (string.charCodeAt(i + 2) & 0xFF) << 16, (string.charCodeAt(i + 1) & 0xFF) << 8, string.charCodeAt(i + 0) & 0xFF];
+	for(var i = 0, len = array.length; i < len; ++i) {
+		array[i] = string.charCodeAt(i) & 0xFF;
 	}
 
 	return array;
