@@ -12,6 +12,8 @@ bit$ter is a binary transcoding utility module which converts binary data betwee
 
 Say what data type you want, how you want it, what input data type you will be providing and bit$ter will do the rest.
 
+**IMPORTANT** Since the last edit the docs and tests are out of date, until test cases are rewritten project state is deemed unstable.
+
 That's... 
 
 * What do you want? ... `bitster.UInt32`
