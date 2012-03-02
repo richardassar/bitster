@@ -25,4 +25,4 @@ lines.forEach(function(line) {
 	}
 });
 
-console.log(JSON.stringify(root).replace(/"/g, ''));
+console.log("var bitster = " + JSON.stringify(root).replace(/"/g, '') + ";");

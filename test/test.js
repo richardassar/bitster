@@ -30,136 +30,114 @@ suite("Array", function() {
 //
 suite("bitster", function() {
 	suite("single values", function() {
-		suite("expected values", function() {
-			suite("String", function() {						
-				test("UInt8", function() { assert.ok(bitster.UInt8.String.from.Number(123) == String.fromCharCode(0x7B), "Unexpected value returned"); });
-				test("UInt16", function() { assert.ok(bitster.UInt16.String.from.Number(12345) == String.fromCharCode(0x30, 0x39), "Unexpected value returned"); });
-				test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.String.from.Number(12345) == String.fromCharCode(0x39, 0x30), "Unexpected value returned"); });
-				test("UInt32", function() { assert.ok(bitster.UInt32.String.from.Number(2309737967) == String.fromCharCode(0x89, 0xAB, 0xCD, 0xEF), "Unexpected value returned"); });
-				test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.String.from.Number(2309737967) == String.fromCharCode(0xEF, 0xCD, 0xAB, 0x89), "Unexpected value returned"); });
-			});
-
-			suite("Array", function() {			
-				test("UInt8", function() { assert.ok(bitster.UInt8.Array.from.Number(123).equals([0x7B]), "Unexpected value returned"); });
-				test("UInt16", function() { assert.ok(bitster.UInt16.Array.from.Number(12345).equals([0x30, 0x39]), "Unexpected value returned"); });
-				test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Array.from.Number(12345).equals([0x39, 0x30]), "Unexpected value returned"); });
-				test("UInt32", function() { assert.ok(bitster.UInt32.Array.from.Number(2309737967).equals([0x89, 0xAB, 0xCD, 0xEF]), "Unexpected value returned"); });
-				test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Array.from.Number(2309737967).equals([0xEF, 0xCD, 0xAB, 0x89]), "Unexpected value returned"); });
-			});
-
-			suite("Number", function() {
-				suite("unsigned", function() {
-					test("UInt8", function() { assert.ok(bitster.UInt8.Number.from.String(String.fromCharCode(0x80)) == 128, "Unexpected value returned"); });
-					test("UInt16", function() { assert.ok(bitster.UInt16.Number.from.String(String.fromCharCode(0x80, 0x00)) == 32768, "Unexpected value returned"); });
-					test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Number.from.String(String.fromCharCode(0x00, 0x80)) == 32768, "Unexpected value returned"); });
-					test("UInt32", function() { assert.ok(bitster.UInt32.Number.from.String(String.fromCharCode(0x80, 0x00, 0x00, 0x00)) == 2147483648, "Unexpected value returned"); });
-					test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Number.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0x80)) == 2147483648, "Unexpected value returned"); });
-				});
-
+		suite("Number", function() {
+			suite("from String", function() {
 				suite("signed", function() {
-					test("Int8", function() { assert.ok(bitster.Int8.Number.from.String(String.fromCharCode(0x80)) == -128, "Unexpected value returned"); });
-					test("Int16", function() { assert.ok(bitster.Int16.Number.from.String(String.fromCharCode(0x80, 0x00)) == -32768, "Unexpected value returned"); });
-					test("Int16_LE", function() { assert.ok(bitster.Int16_LE.Number.from.String(String.fromCharCode(0x00, 0x80)) == -32768, "Unexpected value returned"); });
-					test("Int32", function() { assert.ok(bitster.Int32.Number.from.String(String.fromCharCode(0x80, 0x00, 0x00, 0x00)) == -2147483648, "Unexpected value returned"); });
-					test("Int32_LE", function() { assert.ok(bitster.Int32_LE.Number.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0x80)) == -2147483648, "Unexpected value returned"); });
+					test("Long", function() { assert.ok(bitster.Number.from.Long.String(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)) == -2136224273); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Number.from.LE.Long.String(String.fromCharCode(0xEF, 0xCD, 0xAB, 0x80)) == -2136224273); });
+					test("Short", function() { assert.ok(bitster.Number.from.Short.String(String.fromCharCode(0x80, 0xAB)) == -32597); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Number.from.LE.Short.String(String.fromCharCode(0xAB, 0x80)) == -32597); });
+					test("Byte", function() { assert.ok(bitster.Number.from.Byte.String(String.fromCharCode(0x80)) == -128); });
+				});
+
+				suite("unsigned", function() {
+					test("Long", function() { assert.ok(bitster.Unsigned.Number.from.Long.String(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)) == 2158743023); });
+					test("Little-Endian Unsigned Long", function() { assert.ok(bitster.Unsigned.Number.from.LE.Long.String(String.fromCharCode(0xEF, 0xCD, 0xAB, 0x80)) == 2158743023); });
+					test("Short", function() { assert.ok(bitster.Unsigned.Number.from.Short.String(String.fromCharCode(0x80, 0xAB)) == 32939); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Unsigned.Number.from.LE.Short.String(String.fromCharCode(0xAB, 0x80)) == 32939); });
+					test("Byte", function() { assert.ok(bitster.Unsigned.Number.from.Byte.String(String.fromCharCode(0x80)) == 128); });
+				});
+			});
+
+			suite("from Array", function() {
+				suite("signed", function() {
+					test("Long", function() { assert.ok(bitster.Number.from.Long.Array([0x80, 0xAB, 0xCD, 0xEF]) == -2136224273); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Number.from.LE.Long.Array([0xEF, 0xCD, 0xAB, 0x80]) == -2136224273); });
+					test("Short", function() { assert.ok(bitster.Number.from.Short.Array([0x80, 0xAB]) == -32597); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Number.from.LE.Short.Array([0xAB, 0x80]) == -32597); });
+					test("Byte", function() { assert.ok(bitster.Number.from.Byte.Array([0x80]) == -128); });
+				});
+
+				suite("unsigned", function() {
+					test("Long", function() { assert.ok(bitster.Unsigned.Number.from.Long.Array([0x80, 0xAB, 0xCD, 0xEF]) == 2158743023); });
+					test("Little-Endian Unsigned Long", function() { assert.ok(bitster.Unsigned.Number.from.LE.Long.Array([0xEF, 0xCD, 0xAB, 0x80]) == 2158743023); });
+					test("Short", function() { assert.ok(bitster.Unsigned.Number.from.Short.Array([0x80, 0xAB]) == 32939); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Unsigned.Number.from.LE.Short.Array([0xAB, 0x80]) == 32939); });
+					test("Byte", function() { assert.ok(bitster.Unsigned.Number.from.Byte.Array([0x80]) == 128); });
 				});
 			});
 		});
 
-		suite("identity functions", function() {
-			suite("String <-> Number", function() {	
-				suite("unsigned values", function() {
-					test("UInt8", function() { assert.ok(bitster.UInt8.Number.from.String(bitster.UInt8.String.from.Number(123)) == 123, "Unexpected value returned"); });
-					test("UInt16", function() { assert.ok(bitster.UInt16.Number.from.String(bitster.UInt16.String.from.Number(12345)) == 12345, "Unexpected value returned"); });
-					test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Number.from.String(bitster.UInt16_LE.String.from.Number(12345)) == 12345, "Unexpected value returned"); });
-					test("UInt32", function() { assert.ok(bitster.UInt32.Number.from.String(bitster.UInt32.String.from.Number(2309737967)) == 2309737967, "Unexpected value returned"); });
-					test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Number.from.String(bitster.UInt32_LE.String.from.Number(2309737967)) == 2309737967, "Unexpected value returned"); });
-				});
-
-				suite("signed values", function() {				
-					test("Int8", function() { assert.ok(bitster.Int8.Number.from.String(bitster.UInt8.String.from.Number(-123)) == -123, "Unexpected value returned"); });
-					test("Int16", function() { assert.ok(bitster.Int16.Number.from.String(bitster.UInt16.String.from.Number(-12345)) == -12345, "Unexpected value returned"); });
-					test("Int16_LE", function() { assert.ok(bitster.Int16_LE.Number.from.String(bitster.UInt16_LE.String.from.Number(-12345)) == -12345, "Unexpected value returned"); });
-					test("Int32", function() { assert.ok(bitster.Int32.Number.from.String(bitster.UInt32.String.from.Number(-2147483647)) == -2147483647, "Unexpected value returned"); });
-					test("Int32_LE", function() { assert.ok(bitster.Int32_LE.Number.from.String(bitster.UInt32_LE.String.from.Number(-2147483647)) == -2147483647, "Unexpected value returned"); });
-
-					test("Int8 != Int8", function() { assert.ok(bitster.Int8.Number.from.String(bitster.UInt8.String.from.Number(130)) != bitster.UInt8.Number.from.String(bitster.UInt8.String.from.Number(130)), "Unexpected value returned"); });
-				});
+		suite("String", function() {
+			suite("from Number", function() {
+				test("Long", function() { assert.ok(bitster.Long.String.from.Number(0x80ABCDEF) == String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)); });
+				test("Little-Endian Long", function() { assert.ok(bitster.LE.Long.String.from.Number(0x80ABCDEF) == String.fromCharCode(0xEF, 0xCD, 0xAB, 0x80)); });
+				test("Short", function() { assert.ok(bitster.Short.String.from.Number(0xABCD) == String.fromCharCode(0xAB, 0xCD)); });
+				test("Little-Endian Short", function() { assert.ok(bitster.LE.Short.String.from.Number(0xABCD) == String.fromCharCode(0xCD, 0xAB)); });
+				test("Byte", function() { assert.ok(bitster.Byte.String.from.Number(0xAB) == String.fromCharCode(0xAB)); });
 			});
 
-			suite("Array <-> Number", function() {	
-				suite("unsigned values", function() {
-					test("UInt8", function() { assert.ok(bitster.UInt8.Number.from.Array(bitster.UInt8.Array.from.Number(123)) == 123, "Unexpected value returned"); });
-					test("UInt16", function() { assert.ok(bitster.UInt16.Number.from.Array(bitster.UInt16.Array.from.Number(12345)) == 12345, "Unexpected value returned"); });
-					test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Number.from.Array(bitster.UInt16_LE.Array.from.Number(12345)) == 12345, "Unexpected value returned"); });
-					test("UInt32", function() { assert.ok(bitster.UInt32.Number.from.Array(bitster.UInt32.Array.from.Number(2309737967)) == 2309737967, "Unexpected value returned"); });
-					test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Number.from.Array(bitster.UInt32_LE.Array.from.Number(2309737967)) == 2309737967, "Unexpected value returned"); });
-				});
-
-				suite("signed values", function() {				
-					test("Int8", function() { assert.ok(bitster.Int8.Number.from.Array(bitster.UInt8.Array.from.Number(-123)) == -123, "Unexpected value returned"); });
-					test("Int16", function() { assert.ok(bitster.Int16.Number.from.Array(bitster.UInt16.Array.from.Number(-12345)) == -12345, "Unexpected value returned"); });
-					test("Int16_LE", function() { assert.ok(bitster.Int16_LE.Number.from.Array(bitster.UInt16_LE.Array.from.Number(-12345)) == -12345, "Unexpected value returned"); });
-					test("Int32", function() { assert.ok(bitster.Int32.Number.from.Array(bitster.UInt32.Array.from.Number(-2147483647)) == -2147483647, "Unexpected value returned"); });
-					test("Int32_LE", function() { assert.ok(bitster.Int32_LE.Number.from.Array(bitster.UInt32_LE.Array.from.Number(-2147483647)) == -2147483647, "Unexpected value returned"); });
-
-					test("UInt8 != Int8", function() { assert.ok(bitster.Int8.Number.from.Array(bitster.UInt8.Array.from.Number(130)) != bitster.UInt8.Number.from.String(bitster.UInt8.String.from.Number(130)), "Unexpected value returned"); });
-				});
-			});
-
-			suite("Array <-> String", function() {	
-				suite("unsigned values", function() {
-					test("UInt8", function() { assert.ok(bitster.UInt8.Array.from.String(bitster.UInt8.String.from.Array([0xFE])).equals([0xFE]), "Unexpected value returned"); });
-					test("UInt16", function() { assert.ok(bitster.UInt16.Array.from.String(bitster.UInt16.String.from.Array([0xFE, 0xED])).equals([0xFE, 0xED]), "Unexpected value returned"); });
-					test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Array.from.String(bitster.UInt16_LE.String.from.Array([0xFE, 0xED])).equals([0xFE, 0xED]), "Unexpected value returned"); });
-					test("UInt32", function() { assert.ok(bitster.UInt32.Array.from.String(bitster.UInt32.String.from.Array([0xFE, 0xED, 0xFA, 0xCE])).equals([0xFE, 0xED, 0xFA, 0xCE]), "Unexpected value returned"); });
-					test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Array.from.String(bitster.UInt32_LE.String.from.Array([0xFE, 0xED, 0xFA, 0xCE])).equals([0xFE, 0xED, 0xFA, 0xCE]), "Unexpected value returned"); });
-				});
+			suite("from Array", function() {
+				test("Long", function() { assert.ok(bitster.Long.String.from.Array([0x80, 0xAB, 0xCD, 0xEF]) == String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)); });	
+				test("Short", function() { assert.ok(bitster.Short.String.from.Array([0x80, 0xAB]) == String.fromCharCode(0x80, 0xAB)); });
+				test("Byte", function() { assert.ok(bitster.Byte.String.from.Array([0x80]) == String.fromCharCode(0x80)); });
 			});
 		});
+
+		suite("Array", function() {
+			suite("from Number", function() {
+				test("Long", function() { assert.ok(bitster.Long.Array.from.Number(0x80ABCDEF).equals([0x80, 0xAB, 0xCD, 0xEF])); });
+				test("Little-Endian Long", function() { assert.ok(bitster.LE.Long.Array.from.Number(0x80ABCDEF).equals([0xEF, 0xCD, 0xAB, 0x80])); });
+				test("Short", function() { assert.ok(bitster.Short.Array.from.Number(0xABCD).equals([0xAB, 0xCD])); });
+				test("Little-Endian Short", function() { assert.ok(bitster.LE.Short.Array.from.Number(0xABCD).equals([0xCD, 0xAB])); });
+				test("Byte", function() { assert.ok(bitster.Byte.Array.from.Number(0xAB).equals([0xAB])); });
+			});	
+
+			suite("from String", function() {
+				test("Long", function() { assert.ok(bitster.Long.Array.from.String(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)).equals([0x80, 0xAB, 0xCD, 0xEF])); });
+				test("Short", function() { assert.ok(bitster.Short.Array.from.String(String.fromCharCode(0x80, 0xAB)).equals([0x80, 0xAB])); });
+				test("Byte", function() { assert.ok(bitster.Byte.Array.from.String(String.fromCharCode(0x80)).equals([0x80])); });
+			});		
+		});	
 	});
 
 	suite("streams", function() {
-		suite("expected values", function() {		
-			suite("Raw", function() {
-				suite("String", function() {
-					test("stream", function() { assert.ok(bitster.Raw.String.Stream.from.Array([65, 66, 67, 68]) == String.fromCharCode(65, 66, 67, 68)); });	
-				});
-
-				suite("Array", function() {
-					test("stream", function() { assert.ok(bitster.Raw.Array.Stream.from.String(String.fromCharCode(65, 66, 67, 68)).equals([65, 66, 67, 68]); });						
-				});
-			});
-
-			suite("String", function() {
-				test("UInt8", function() { assert.ok(bitster.UInt8.String.Stream.from.Array([[65], [66], [67], [68]]) == String.fromCharCode(65, 66, 67, 68)); });
-				test("UInt16", function() { assert.ok(bitster.UInt16.String.Stream.from.Array([[65, 66], [67, 68]]) == String.fromCharCode(65, 66, 67, 68)); });
-				test("UInt32", function() { assert.ok(bitster.UInt32.String.Stream.from.Array([[65, 66, 67, 68]]) == String.fromCharCode(65, 66, 67, 68)); });
-			});
-
-			suite("Array", function() {
-				test("UInt8", function() { assert.ok(bitster.UInt8.Array.Stream.from.String(String.fromCharCode(65, 66, 67, 68)).equals([[65], [66], [67], [68]])); });
-				test("UInt16", function() { assert.ok(bitster.UInt16.Array.Stream.from.String(String.fromCharCode(65, 66, 67, 68)).equals([[65, 66], [67, 68]])); });
-				test("UInt32", function() { assert.ok(bitster.UInt32.Array.Stream.from.String(String.fromCharCode(65, 66, 67, 68)).equals([[65, 66, 67, 68]])); });
-			});
-
-			suite("Number", function() {
-				suite("unsigned", function() {
-					test("UInt8", function() { assert.ok(bitster.UInt8.Number.Stream.from.String(String.fromCharCode(0x00, 0x01, 0x02, 0x80)).equals([0, 1, 2, 128]), "Unexpected value returned"); });
-					test("UInt16", function() { assert.ok(bitster.UInt16.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0x0F, 0xFF, 0xFF)).equals([0, 15, 65535]), "Unexpected value returned"); });
-					test("UInt16_LE", function() { assert.ok(bitster.UInt16_LE.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x0F, 0x00, 0xFF, 0xFF)).equals([0, 15, 65535]), "Unexpected value returned"); });
-					test("UInt32", function() { assert.ok(bitster.UInt32.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0xFF, 0x00, 0xFF, 0xFF, 0xFF)).equals([255, 16777215]), "Unexpected value returned"); });
-					test("UInt32_LE", function() { assert.ok(bitster.UInt32_LE.Number.Stream.from.String(String.fromCharCode(0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00)).equals([255, 16777215]), "Unexpected value returned"); });
-				});
-
+		suite("Number", function() {
+			suite("from String", function() {
 				suite("signed", function() {
-					test("Int8", function() { assert.ok(bitster.Int8.Number.Stream.from.String(String.fromCharCode(0x00, 0x01, 0x02, 0x80)).equals([0, 1, 2, -128]), "Unexpected value returned"); });
-					test("Int16", function() { assert.ok(bitster.Int16.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0x0F, 0x80, 0x00)).equals([0, 15, -32768]), "Unexpected value returned"); });
-					test("Int16_LE", function() { assert.ok(bitster.Int16_LE.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x0F, 0x00, 0x00, 0x80)).equals([0, 15, -32768]), "Unexpected value returned"); });
-					test("Int32", function() { assert.ok(bitster.Int32.Number.Stream.from.String(String.fromCharCode(0x00, 0x00, 0x00, 0xFF, 0x80, 0x00, 0x00, 0x00)).equals([255, -2147483648]), "Unexpected value returned"); });
-					test("Int32_LE", function() { assert.ok(bitster.Int32_LE.Number.Stream.from.String(String.fromCharCode(0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80)).equals([255, -2147483648]), "Unexpected value returned"); });
+					test("Long", function() { assert.ok(bitster.Number.Stream.from.Long.String.Stream(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF, 0xAA, 0xBB, 0xCC, 0xDD)).equals([-2136224273, -1430532899])); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Number.Stream.from.LE.Long.String.Stream(String.fromCharCode(0xEF, 0xCD, 0xAB, 0x80, 0xDD, 0xCC, 0xBB, 0xAA)).equals([-2136224273, -1430532899])); });
+					test("Short", function() { assert.ok(bitster.Number.Stream.from.Short.String.Stream(String.fromCharCode(0x80, 0xAB, 0xAA, 0xBB)).equals([-32597, -21829])); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Number.Stream.from.LE.Short.String.Stream(String.fromCharCode(0xAB, 0x80, 0xBB, 0xAA)).equals([-32597, -21829])); });
+					test("Byte", function() { assert.ok(bitster.Number.Stream.from.Byte.String.Stream(String.fromCharCode(0x77, 0x88, 0x99, 0xFF)).equals([119, -120, -103, -1])); });
 				});
-			});	
+
+				suite("unsigned", function() {
+					test("Long", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Long.String.Stream(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF, 0xAA, 0xBB, 0xCC, 0xDD)).equals([2158743023, 2864434397])); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Unsigned.Number.Stream.from.LE.Long.String.Stream(String.fromCharCode(0xEF, 0xCD, 0xAB, 0x80, 0xDD, 0xCC, 0xBB, 0xAA)).equals([2158743023, 2864434397])); });
+					test("Short", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Short.String.Stream(String.fromCharCode(0x80, 0xAB, 0xAA, 0xBB)).equals([32939, 43707])); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Unsigned.Number.Stream.from.LE.Short.String.Stream(String.fromCharCode(0xAB, 0x80, 0xBB, 0xAA)).equals([32939, 43707])); });
+					test("Byte", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Byte.String.Stream(String.fromCharCode(0x77, 0x88, 0x99, 0xFF)).equals([119, 136, 153, 255])); });
+				});
+			});
+
+			suite("from Array", function() {
+				suite("signed", function() {
+					test("Long", function() { assert.ok(bitster.Number.Stream.from.Long.Array.Stream([[0x80, 0xAB, 0xCD, 0xEF], [0xAA, 0xBB, 0xCC, 0xDD]]).equals([-2136224273, -1430532899])); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Number.Stream.from.LE.Long.Array.Stream([[0xEF, 0xCD, 0xAB, 0x80], [0xDD, 0xCC, 0xBB, 0xAA]]).equals([-2136224273, -1430532899])); });
+					test("Short", function() { assert.ok(bitster.Number.Stream.from.Short.Array.Stream([[0x80, 0xAB], [0xAA, 0xBB]]).equals([-32597, -21829])); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Number.Stream.from.LE.Short.Array.Stream([[0xAB, 0x80], [0xBB, 0xAA]]).equals([-32597, -21829])); });
+					test("Byte", function() { assert.ok(bitster.Number.Stream.from.Byte.Array.Stream([[0x77], [0x88], [0x99], [0xFF]]).equals([119, -120, -103, -1])); });
+				});
+
+				suite("unsigned", function() {
+					test("Long", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Long.Array.Stream([[0x80, 0xAB, 0xCD, 0xEF], [0xAA, 0xBB, 0xCC, 0xDD]]).equals([2158743023, 2864434397])); });
+					test("Little-Endian Long", function() { assert.ok(bitster.Unsigned.Number.Stream.from.LE.Long.Array.Stream([[0xEF, 0xCD, 0xAB, 0x80], [0xDD, 0xCC, 0xBB, 0xAA]]).equals([2158743023, 2864434397])); });
+					test("Short", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Short.Array.Stream([[0x80, 0xAB], [0xAA, 0xBB]]).equals([32939, 43707])); });
+					test("Little-Endian Short", function() { assert.ok(bitster.Unsigned.Number.Stream.from.LE.Short.Array.Stream([[0xAB, 0x80], [0xBB, 0xAA]]).equals([32939, 43707])); });
+					test("Byte", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Byte.Array.Stream([[0x77], [0x88], [0x99], [0xFF]]).equals([119, 136, 153, 255])); });
+				});
+			});
 		});
 	});
 });
