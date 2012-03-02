@@ -1,6 +1,6 @@
 //
-bitster.invert.endianness.of.Long.String = function(string) { return String.fromCharCode(string.charAt(3), string.charAt(2), string.charAt(1), string.charAt(0)); };
-bitster.invert.endianness.of.Short.String = function(string) { return String.fromCharCode(string.charAt(1), string.charAt(0)); };
+bitster.invert.endianness.of.Long.String = function(string) { return string.charAt(3) + string.charAt(2) + string.charAt(1) + string.charAt(0); };
+bitster.invert.endianness.of.Short.String = function(string) { return string.charAt(1) + string.charAt(0); };
 
 bitster.invert.endianness.of.Long.Array = function(array) { return [array[3], array[2], array[1], array[0]]; };
 bitster.invert.endianness.of.Short.Array = function(array) { return [array[1], array[0]]; };
@@ -207,7 +207,7 @@ bitster.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
 	return numberStream;
 };
 
-bitster.Unsigned.Number.Stream.from.Array.Stream = function(arrayStream) {
+bitster.Unsigned.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
 	var numberStream = new Array(arrayStream.length);	
 	
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
@@ -302,7 +302,7 @@ bitster.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
 	var string = '';	
 	
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
-		string += String.fromCharCode(array[i][0] & 0xFF);
+		string += String.fromCharCode(arrayStream[i][0] & 0xFF);
 	}
 
 	return string;
@@ -332,7 +332,7 @@ bitster.Long.String.Stream.from.Long.Array.Stream = function(arrayStream) {
 bitster.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
 	var arrayStream = new Array(stringStream.length);	
 	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
+	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		arrayStream[i] = [stringStream.charCodeAt(i) & 0xFF];
 	}
 
@@ -342,7 +342,7 @@ bitster.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
 bitster.Short.Array.Stream.from.Short.String.Stream = function(stringStream) {
 	var arrayStream = new Array(stringStream.length / 2);	
 	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 2) {
+	for(var i = 0, j = 0, len = arrayStream.length; j < len; i += 2) {
 		arrayStream[j++] = [stringStream.charCodeAt(i) & 0xFF, stringStream.charCodeAt(i + 1) & 0xFF];
 	}
 
@@ -352,7 +352,7 @@ bitster.Short.Array.Stream.from.Short.String.Stream = function(stringStream) {
 bitster.Long.Array.Stream.from.Long.String.Stream = function(stringStream) {
 	var arrayStream = new Array(stringStream.length / 4);	
 	
-	for(var i = 0, j = 0, len = array.length; j < len; i += 4) {
+	for(var i = 0, j = 0, len = arrayStream.length; j < len; i += 4) {
 		arrayStream[j++] = [stringStream.charCodeAt(i) & 0xFF, stringStream.charCodeAt(i + 1) & 0xFF, stringStream.charCodeAt(i + 2) & 0xFF, stringStream.charCodeAt(i + 3) & 0xFF];
 	}
 

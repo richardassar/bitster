@@ -10,7 +10,15 @@ Array.prototype.equals = function(val) {
 	}
 
 	for(var i = 0, len = this.length; i < len; ++i) {		
-		if(this[i] != val[i]) {
+		if(this[i] instanceof Array) {
+			if(val[i] instanceof Array) {
+				if(!this[i].equals(val[i])) {
+					return false;
+				}
+			} else {
+				return false;
+			} 
+		} else if(this[i] != val[i]) {
 			return false;
 		}
 	}
@@ -137,6 +145,53 @@ suite("bitster", function() {
 					test("Little-Endian Short", function() { assert.ok(bitster.Unsigned.Number.Stream.from.LE.Short.Array.Stream([[0xAB, 0x80], [0xBB, 0xAA]]).equals([32939, 43707])); });
 					test("Byte", function() { assert.ok(bitster.Unsigned.Number.Stream.from.Byte.Array.Stream([[0x77], [0x88], [0x99], [0xFF]]).equals([119, 136, 153, 255])); });
 				});
+			});
+		});
+
+		suite("String", function() {
+			suite("from Array", function() {
+				test("Long", function() { assert.ok(bitster.Long.String.Stream.from.Long.Array.Stream([[0x77, 0x88, 0x99, 0xFF]]) == String.fromCharCode(119, 136, 153, 255)); });
+				test("Short", function() { assert.ok(bitster.Short.String.Stream.from.Short.Array.Stream([[0x77, 0x88], [0x99, 0xFF]]) == String.fromCharCode(119, 136, 153, 255)); });
+				test("Byte", function() { assert.ok(bitster.Byte.String.Stream.from.Byte.Array.Stream([[0x77], [0x88], [0x99], [0xFF]]) == String.fromCharCode(119, 136, 153, 255)); });
+			});
+		});
+
+		suite("Array", function() {
+			suite("from String", function() {
+				test("Long", function() { assert.ok(bitster.Long.Array.Stream.from.Long.String.Stream(String.fromCharCode(119, 136, 153, 255)).equals([[0x77, 0x88, 0x99, 0xFF]])); });
+				test("Short", function() { assert.ok(bitster.Short.Array.Stream.from.Short.String.Stream(String.fromCharCode(119, 136, 153, 255)).equals([[0x77, 0x88], [0x99, 0xFF]])); });
+				test("Byte", function() { assert.ok(bitster.Byte.Array.Stream.from.Byte.String.Stream(String.fromCharCode(119, 136, 153, 255)).equals([[0x77], [0x88], [0x99], [0xFF]])); });
+			});
+		});
+
+		suite("Raw", function() {
+			test("String from Array", function() { assert.ok(bitster.Raw.Byte.String.Stream.from.Byte.Array.Byte([119, 136, 153, 255]) == String.fromCharCode(119, 136, 153, 255)); });
+			test("Array from String", function() { assert.ok(bitster.Raw.Byte.Array.Stream.from.Byte.String.Stream(String.fromCharCode(119, 136, 153, 255)).equals([119, 136, 153, 255])); });
+		});
+	});
+
+	suite("endianness", function() {
+		suite("single values", function() {
+			suite("String", function() {
+				test("Long", function() { assert.ok(bitster.invert.endianness.of.Long.String(String.fromCharCode(0x80, 0xAB, 0xAA, 0xBB)) == String.fromCharCode(0xBB, 0xAA, 0xAB, 0x80)); });
+				test("Short", function() { assert.ok(bitster.invert.endianness.of.Short.String(String.fromCharCode(0x80, 0xAB)) == String.fromCharCode(0xAB, 0x80)); });
+			});
+
+			suite("Array", function() {
+				test("Long", function() { assert.ok(bitster.invert.endianness.of.Long.Array([0x80, 0xAB, 0xAA, 0xBB]).equals([0xBB, 0xAA, 0xAB, 0x80])); });
+				test("Short", function() { assert.ok(bitster.invert.endianness.of.Short.Array([0x80, 0xAB]).equals([0xAB, 0x80])); });
+			});
+		});
+
+		suite("streams", function() {
+			suite("String", function() {
+				test("Long", function() { assert.ok(bitster.invert.endianness.of.Long.String.Stream(String.fromCharCode(0xAB, 0xCD, 0xEF, 0xFE, 0xDC, 0xAB, 0xCD, 0xEF)) == String.fromCharCode(0xFE, 0xEF, 0xCD, 0xAB, 0xEF, 0xCD, 0xAB, 0xDC)); });
+				test("Short", function() { assert.ok(bitster.invert.endianness.of.Short.String.Stream(String.fromCharCode(0xAB, 0xCD, 0xEF, 0xFE)) == String.fromCharCode(0xCD, 0xAB, 0xFE, 0xEF)); });
+			});
+
+			suite("Array", function() {
+				test("Long", function() { assert.ok(bitster.invert.endianness.of.Long.Array.Stream([[0xAB, 0xCD, 0xEF, 0xFE], [0xDC, 0xAB, 0xCD, 0xEF]]).equals([[0xFE, 0xEF, 0xCD, 0xAB], [0xEF, 0xCD, 0xAB, 0xDC]])); });
+				test("Short", function() { assert.ok(bitster.invert.endianness.of.Short.Array.Stream([[0xAB, 0xCD], [0xEF, 0xFE]]).equals([[0xCD, 0xAB], [0xFE, 0xEF]])); });
 			});
 		});
 	});
