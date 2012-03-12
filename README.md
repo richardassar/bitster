@@ -6,22 +6,22 @@
 
 ## About
 
-bit$ter traffics shipments of binary data between native JavaScript data-types.
+bit$ter traffics shipments of binary data between native JavaScript data-types. It has been written with both speed and ease of use in mind.
 
 Packing and unpacking data can be slow and painful. bit$ter attempts to alleviate that pain with a shotgun... hold it... **tommy gun**, approach.
 
-It has been written with both speed and ease of use in mind. Say what you want, how you want it, what input you will provide and bit$ter will provide the goods.
+Say what you want, how you want it, what input you will provide and bit$ter will provide the goods.
 
 ## Examples
 
 Converting single values:
 
-* `bitster.Unsigned.Number.from.Long.String(stringData)` means "Unpack me an unsigned Number from a Long (32-bit) integer ".
-* `bitster.Short.String.from.Number(number)` means "Pack me a Short (16-bit) integer into string format from a Number".
+`bitster.Unsigned.Number.from.Long.String(stringData)` means "Unpack me an unsigned Number from a Long (32-bit) integer ".
+`bitster.Short.String.from.Number(number)` means "Pack me a Short (16-bit) integer into string format from a Number".
 
 Converting streams:
 
-* `bitster.Byte.Array.Stream.from.Byte.String.Stream` means "Convert a Byte stream in String representation to a Byte Array stream".
+`bitster.Byte.Array.Stream.from.Byte.String.Stream` means "Convert a Byte stream in String representation to a Byte Array stream".
 
 For more examples see the examples/ directory. [**TODO**]
 
