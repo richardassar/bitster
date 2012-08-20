@@ -1,10 +1,3 @@
-!function (name, context, definition) {
-  if (typeof module !== 'undefined') module.exports = definition(name, context);
-  else if (typeof define === 'function' && typeof define.amd  === 'object') define(definition);
-  else context[name] = definition(name, context);
-}("bitster", this, function(name, context) {
-
-// Dont fsck with the bit$ter
 var bitster = {invert:{endianness:{of:{Long:{String:{Stream:{}},Array:{Stream:{}}},Short:{String:{Stream:{}},Array:{Stream:{}}}}}},Number:{from:{Long:{String:{},Array:{}},LE:{Long:{String:{},Array:{}},Short:{String:{},Array:{}}},Short:{String:{},Array:{}},Byte:{String:{},Array:{}}},Stream:{from:{Byte:{String:{Stream:{}},Array:{Stream:{}}},Short:{String:{Stream:{}},Array:{Stream:{}}},LE:{Short:{String:{Stream:{}},Array:{Stream:{}}},Long:{String:{Stream:{}},Array:{Stream:{}}}},Long:{String:{Stream:{}},Array:{Stream:{}}}}}},Unsigned:{Number:{from:{Long:{String:{},Array:{}},LE:{Long:{String:{},Array:{}},Short:{String:{},Array:{}}},Short:{String:{},Array:{}},Byte:{String:{},Array:{}}},Stream:{from:{Byte:{String:{Stream:{}},Array:{Stream:{}}},Short:{String:{Stream:{}},Array:{Stream:{}}},LE:{Short:{String:{Stream:{}},Array:{Stream:{}}},Long:{String:{Stream:{}},Array:{Stream:{}}}},Long:{String:{Stream:{}},Array:{Stream:{}}}}}}},Long:{String:{from:{Number:{},Array:{}},Stream:{from:{Long:{Array:{Stream:{}}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{Long:{String:{Stream:{}}}}}}},LE:{Long:{String:{from:{Number:{}}},Array:{from:{Number:{}}}},Short:{String:{from:{Number:{}}},Array:{from:{Number:{}}}}},Short:{String:{from:{Number:{},Array:{}},Stream:{from:{Short:{Array:{Stream:{}}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{Short:{String:{Stream:{}}}}}}},Byte:{String:{from:{Number:{},Array:{}},Stream:{from:{Byte:{Array:{Stream:{}}}}}},Array:{from:{Number:{},String:{}},Stream:{from:{Byte:{String:{Stream:{}}}}}}},Raw:{Byte:{String:{Stream:{from:{Byte:{Array:{Stream:{}}}}}},Array:{Stream:{from:{Byte:{String:{Stream:{}}}}}}}}};
 
 //
@@ -388,5 +381,3 @@ bitster.Raw.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
 
 	return array;
 };
-
-return bitster; });

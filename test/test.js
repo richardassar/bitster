@@ -1,15 +1,15 @@
-var 
+var
 	bitster = require("../"),
 	chai = require('chai'),
 	assert = chai.assert;
 
 // TODO: Move into proto project
-Array.prototype.equals = function(val) { 	
+Array.prototype.equals = function(val) {
 	if(!val || !(val instanceof Array) || this.length != val.length) {
 		return false;
 	}
 
-	for(var i = 0, len = this.length; i < len; ++i) {		
+	for(var i = 0, len = this.length; i < len; ++i) {
 		if(this[i] instanceof Array) {
 			if(val[i] instanceof Array) {
 				if(!this[i].equals(val[i])) {
@@ -17,12 +17,12 @@ Array.prototype.equals = function(val) {
 				}
 			} else {
 				return false;
-			} 
+			}
 		} else if(this[i] != val[i]) {
 			return false;
 		}
 	}
-	
+
 	return true;
 };
 
@@ -32,7 +32,7 @@ suite("Array", function() {
 		test("unequals arrays are not equal", function() { assert.ok(![1,2,4].equals([1,2,3])); });
 		test("arrays are not equal to undefined", function() { assert.ok(![1,2,4].equals(undefined)); });
 		test("arrays are not equal to null", function() { assert.ok(![1,2,4].equals(null)); });
-	});	
+	});
 });
 
 //
@@ -86,7 +86,7 @@ suite("bitster", function() {
 			});
 
 			suite("from Array", function() {
-				test("Long", function() { assert.ok(bitster.Long.String.from.Array([0x80, 0xAB, 0xCD, 0xEF]) == String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)); });	
+				test("Long", function() { assert.ok(bitster.Long.String.from.Array([0x80, 0xAB, 0xCD, 0xEF]) == String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)); });
 				test("Short", function() { assert.ok(bitster.Short.String.from.Array([0x80, 0xAB]) == String.fromCharCode(0x80, 0xAB)); });
 				test("Byte", function() { assert.ok(bitster.Byte.String.from.Array([0x80]) == String.fromCharCode(0x80)); });
 			});
@@ -99,14 +99,14 @@ suite("bitster", function() {
 				test("Short", function() { assert.ok(bitster.Short.Array.from.Number(0xABCD).equals([0xAB, 0xCD])); });
 				test("Little-Endian Short", function() { assert.ok(bitster.LE.Short.Array.from.Number(0xABCD).equals([0xCD, 0xAB])); });
 				test("Byte", function() { assert.ok(bitster.Byte.Array.from.Number(0xAB).equals([0xAB])); });
-			});	
+			});
 
 			suite("from String", function() {
 				test("Long", function() { assert.ok(bitster.Long.Array.from.String(String.fromCharCode(0x80, 0xAB, 0xCD, 0xEF)).equals([0x80, 0xAB, 0xCD, 0xEF])); });
 				test("Short", function() { assert.ok(bitster.Short.Array.from.String(String.fromCharCode(0x80, 0xAB)).equals([0x80, 0xAB])); });
 				test("Byte", function() { assert.ok(bitster.Byte.Array.from.String(String.fromCharCode(0x80)).equals([0x80])); });
-			});		
-		});	
+			});
+		});
 	});
 
 	suite("streams", function() {

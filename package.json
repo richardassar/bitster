@@ -4,7 +4,7 @@
 	"keywords" : ["native", "binary", "encode", "decode", "convert", "translate", "stream", "unsigned", "signed"],
 	"version" : "0.0.1",
 	"author" : "Richard Assar <richardassar@googlemail.com>",
-	"main" : "./dist/bitster.js",
+	"main" : "./index.js",
 	"repository" : {
 		"type" : "git",
 		"url" : "https://github.com/richardassar/binary"

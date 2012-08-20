@@ -3,9 +3,9 @@ all: dist/bitster.js dist/bitster.min.js
 dist:
 	mkdir -p dist
 
-dist/bitster.js: dist src/header.js src/bitster.js src/footer.js utils/generateNamespace.js
+dist/bitster.js: dist src/bitster.js utils/generateNamespace.js
 	@echo "Building bitster.js"
-	(cat src/header.js; node utils/generateNamespace.js; cat src/bitster.js; cat src/footer.js) > dist/bitster.js
+	(node utils/generateNamespace.js; cat src/bitster.js) > dist/bitster.js
 
 dist/bitster.min.js: dist dist/bitster.js
 	@echo "Building bitster.min.js"
