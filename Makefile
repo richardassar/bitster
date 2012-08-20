@@ -15,6 +15,6 @@ clean:
 	rm -rf dist/
 
 test: dist/bitster.min.js
-	@./node_modules/.bin/mocha --reporter spec -u tdd
+	@./node_modules/mocha/bin/mocha --reporter spec -u tdd
 
 .PHONY: test clean

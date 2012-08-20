@@ -8,7 +8,7 @@ bitster.invert.endianness.of.Long.Array = function(array) { return [array[3], ar
 bitster.invert.endianness.of.Short.Array = function(array) { return [array[1], array[0]]; };
 
 //
-bitster.invert.endianness.of.Long.String.Stream = function(inStringStream) { 
+bitster.invert.endianness.of.Long.String.Stream = function(inStringStream) {
 	var outStringStream = '';
 
 	for(var i = 0, len = inStringStream.length; i < len; i += 4) {
@@ -18,7 +18,7 @@ bitster.invert.endianness.of.Long.String.Stream = function(inStringStream) {
 	return outStringStream;
 };
 
-bitster.invert.endianness.of.Short.String.Stream = function(inStringStream) { 
+bitster.invert.endianness.of.Short.String.Stream = function(inStringStream) {
 	var outStringStream = '';
 
 	for(var i = 0, len = inStringStream.length; i < len; i += 2) {
@@ -28,7 +28,7 @@ bitster.invert.endianness.of.Short.String.Stream = function(inStringStream) {
 	return outStringStream;
 };
 
-bitster.invert.endianness.of.Long.Array.Stream = function(inArrayStream) { 
+bitster.invert.endianness.of.Long.Array.Stream = function(inArrayStream) {
 	var outArrayStream = new Array(inArrayStream.length);
 
 	for(var i = 0, len = inArrayStream.length; i < len; ++i) {
@@ -38,7 +38,7 @@ bitster.invert.endianness.of.Long.Array.Stream = function(inArrayStream) {
 	return outArrayStream;
 };
 
-bitster.invert.endianness.of.Short.Array.Stream = function(inArrayStream) { 
+bitster.invert.endianness.of.Short.Array.Stream = function(inArrayStream) {
 	var outArrayStream = new Array(inArrayStream.length);
 
 	for(var i = 0, len = inArrayStream.length; i < len; ++i) {
@@ -99,8 +99,8 @@ bitster.Byte.Array.from.String     = function(string) { return [string.charCodeA
 
 //
 bitster.Number.Stream.from.Byte.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length);	
-	
+	var numberStream = new Array(stringStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = (stringStream.charCodeAt(i) & 0xFF) << 24 >> 24;
 	}
@@ -109,8 +109,8 @@ bitster.Number.Stream.from.Byte.String.Stream = function(stringStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.Byte.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length);	
-	
+	var numberStream = new Array(stringStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = stringStream.charCodeAt(i) & 0xFF;
 	}
@@ -119,8 +119,8 @@ bitster.Unsigned.Number.Stream.from.Byte.String.Stream = function(stringStream) 
 };
 
 bitster.Number.Stream.from.Short.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 2);	
-	
+	var numberStream = new Array(stringStream.length / 2);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 2) {
 		numberStream[j++] = ((stringStream.charCodeAt(i) & 0xFF) << 8 | stringStream.charCodeAt(i + 1) & 0xFF) << 16 >> 16;
 	}
@@ -129,8 +129,8 @@ bitster.Number.Stream.from.Short.String.Stream = function(stringStream) {
 };
 
 bitster.Number.Stream.from.LE.Short.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 2);	
-	
+	var numberStream = new Array(stringStream.length / 2);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 2) {
 		numberStream[j++] = ((stringStream.charCodeAt(i + 1) & 0xFF) << 8 | stringStream.charCodeAt(i) & 0xFF) << 16 >> 16;
 	}
@@ -139,8 +139,8 @@ bitster.Number.Stream.from.LE.Short.String.Stream = function(stringStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.Short.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 2);	
-	
+	var numberStream = new Array(stringStream.length / 2);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 2) {
 		numberStream[j++] = (stringStream.charCodeAt(i) & 0xFF) << 8 | stringStream.charCodeAt(i + 1) & 0xFF;
 	}
@@ -149,8 +149,8 @@ bitster.Unsigned.Number.Stream.from.Short.String.Stream = function(stringStream)
 };
 
 bitster.Unsigned.Number.Stream.from.LE.Short.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 2);	
-	
+	var numberStream = new Array(stringStream.length / 2);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 2) {
 		numberStream[j++] = (stringStream.charCodeAt(i + 1) & 0xFF) << 8 | stringStream.charCodeAt(i) & 0xFF;
 	}
@@ -159,8 +159,8 @@ bitster.Unsigned.Number.Stream.from.LE.Short.String.Stream = function(stringStre
 };
 
 bitster.Number.Stream.from.Long.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 4);	
-	
+	var numberStream = new Array(stringStream.length / 4);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 4) {
 		numberStream[j++] = (stringStream.charCodeAt(i) & 0xFF) << 24 | (stringStream.charCodeAt(i + 1) & 0xFF) << 16 | (stringStream.charCodeAt(i + 2) & 0xFF) << 8 | stringStream.charCodeAt(i + 3) & 0xFF;
 	}
@@ -169,8 +169,8 @@ bitster.Number.Stream.from.Long.String.Stream = function(stringStream) {
 };
 
 bitster.Number.Stream.from.LE.Long.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 4);	
-	
+	var numberStream = new Array(stringStream.length / 4);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 4) {
 		numberStream[j++] = (stringStream.charCodeAt(i + 3) & 0xFF) << 24 | (stringStream.charCodeAt(i + 2) & 0xFF) << 16 | (stringStream.charCodeAt(i + 1) & 0xFF) << 8 | stringStream.charCodeAt(i) & 0xFF;
 	}
@@ -179,8 +179,8 @@ bitster.Number.Stream.from.LE.Long.String.Stream = function(stringStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.Long.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 4);	
-	
+	var numberStream = new Array(stringStream.length / 4);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 4) {
 		numberStream[j++] = ((stringStream.charCodeAt(i) & 0xFF) << 24 | (stringStream.charCodeAt(i + 1) & 0xFF) << 16 | (stringStream.charCodeAt(i + 2) & 0xFF) << 8 | stringStream.charCodeAt(i + 3) & 0xFF) >>> 0;
 	}
@@ -189,8 +189,8 @@ bitster.Unsigned.Number.Stream.from.Long.String.Stream = function(stringStream) 
 };
 
 bitster.Unsigned.Number.Stream.from.LE.Long.String.Stream = function(stringStream) {
-	var numberStream = new Array(stringStream.length / 4);	
-	
+	var numberStream = new Array(stringStream.length / 4);
+
 	for(var i = 0, j = 0, len = numberStream.length; j < len; i += 4) {
 		numberStream[j++] = ((stringStream.charCodeAt(i + 3) & 0xFF) << 24 | (stringStream.charCodeAt(i + 2) & 0xFF) << 16 | (stringStream.charCodeAt(i + 1) & 0xFF) << 8 | stringStream.charCodeAt(i) & 0xFF) >>> 0;
 	}
@@ -200,8 +200,8 @@ bitster.Unsigned.Number.Stream.from.LE.Long.String.Stream = function(stringStrea
 
 //
 bitster.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = (arrayStream[i][0] & 0xFF) << 24 >> 24;
 	}
@@ -210,8 +210,8 @@ bitster.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = arrayStream[i][0];
 	}
@@ -221,7 +221,7 @@ bitster.Unsigned.Number.Stream.from.Byte.Array.Stream = function(arrayStream) {
 
 bitster.Number.Stream.from.Short.Array.Stream = function(arrayStream) {
 	var numberStream = new Array(arrayStream.length);
-	
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][0] & 0xFF) << 8 | arrayStream[i][1] & 0xFF) << 16 >> 16;
 	}
@@ -231,7 +231,7 @@ bitster.Number.Stream.from.Short.Array.Stream = function(arrayStream) {
 
 bitster.Number.Stream.from.LE.Short.Array.Stream = function(arrayStream) {
 	var numberStream = new Array(arrayStream.length);
-	
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][1] & 0xFF) << 8 | arrayStream[i][0] & 0xFF) << 16 >> 16;
 	}
@@ -240,8 +240,8 @@ bitster.Number.Stream.from.LE.Short.Array.Stream = function(arrayStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.Short.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][0] & 0xFF) << 8 | arrayStream[i][1] & 0xFF);
 	}
@@ -250,8 +250,8 @@ bitster.Unsigned.Number.Stream.from.Short.Array.Stream = function(arrayStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.LE.Short.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][1] & 0xFF) << 8 | arrayStream[i][0] & 0xFF);
 	}
@@ -260,8 +260,8 @@ bitster.Unsigned.Number.Stream.from.LE.Short.Array.Stream = function(arrayStream
 };
 
 bitster.Number.Stream.from.Long.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][0] & 0xFF) << 24 | (arrayStream[i][1] & 0xFF) << 16 | (arrayStream[i][2] & 0xFF) << 8 | arrayStream[i][3] & 0xFF);
 	}
@@ -270,8 +270,8 @@ bitster.Number.Stream.from.Long.Array.Stream = function(arrayStream) {
 };
 
 bitster.Number.Stream.from.LE.Long.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][3] & 0xFF) << 24 | (arrayStream[i][2] & 0xFF) << 16 | (arrayStream[i][1] & 0xFF) << 8 | arrayStream[i][0] & 0xFF);
 	}
@@ -281,7 +281,7 @@ bitster.Number.Stream.from.LE.Long.Array.Stream = function(arrayStream) {
 
 bitster.Unsigned.Number.Stream.from.Long.Array.Stream = function(arrayStream) {
 	var numberStream = new Array(arrayStream.length);
-	
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][0] & 0xFF) << 24 | (arrayStream[i][1] & 0xFF) << 16 | (arrayStream[i][2] & 0xFF) << 8 | arrayStream[i][3] & 0xFF) >>> 0;
 	}
@@ -290,8 +290,8 @@ bitster.Unsigned.Number.Stream.from.Long.Array.Stream = function(arrayStream) {
 };
 
 bitster.Unsigned.Number.Stream.from.LE.Long.Array.Stream = function(arrayStream) {
-	var numberStream = new Array(arrayStream.length);	
-	
+	var numberStream = new Array(arrayStream.length);
+
 	for(var i = 0, len = numberStream.length; i < len; ++i) {
 		numberStream[i] = ((arrayStream[i][3] & 0xFF) << 24 | (arrayStream[i][2] & 0xFF) << 16 | (arrayStream[i][1] & 0xFF) << 8 | arrayStream[i][0] & 0xFF) >>> 0;
 	}
@@ -301,8 +301,8 @@ bitster.Unsigned.Number.Stream.from.LE.Long.Array.Stream = function(arrayStream)
 
 //
 bitster.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
-	var stringStream = '';	
-	
+	var stringStream = '';
+
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF);
 	}
@@ -311,8 +311,8 @@ bitster.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
 };
 
 bitster.Short.String.Stream.from.Short.Array.Stream = function(arrayStream) {
-	var stringStream = '';	
-	
+	var stringStream = '';
+
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF);
 	}
@@ -321,8 +321,8 @@ bitster.Short.String.Stream.from.Short.Array.Stream = function(arrayStream) {
 };
 
 bitster.Long.String.Stream.from.Long.Array.Stream = function(arrayStream) {
-	var stringStream = '';	
-	
+	var stringStream = '';
+
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		stringStream += String.fromCharCode(arrayStream[i][0] & 0xFF) + String.fromCharCode(arrayStream[i][1] & 0xFF) + String.fromCharCode(arrayStream[i][2] & 0xFF) + String.fromCharCode(arrayStream[i][3] & 0xFF);
 	}
@@ -332,8 +332,8 @@ bitster.Long.String.Stream.from.Long.Array.Stream = function(arrayStream) {
 
 //
 bitster.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
-	var arrayStream = new Array(stringStream.length);	
-	
+	var arrayStream = new Array(stringStream.length);
+
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		arrayStream[i] = [stringStream.charCodeAt(i) & 0xFF];
 	}
@@ -342,8 +342,8 @@ bitster.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
 };
 
 bitster.Short.Array.Stream.from.Short.String.Stream = function(stringStream) {
-	var arrayStream = new Array(stringStream.length / 2);	
-	
+	var arrayStream = new Array(stringStream.length / 2);
+
 	for(var i = 0, j = 0, len = arrayStream.length; j < len; i += 2) {
 		arrayStream[j++] = [stringStream.charCodeAt(i) & 0xFF, stringStream.charCodeAt(i + 1) & 0xFF];
 	}
@@ -352,8 +352,8 @@ bitster.Short.Array.Stream.from.Short.String.Stream = function(stringStream) {
 };
 
 bitster.Long.Array.Stream.from.Long.String.Stream = function(stringStream) {
-	var arrayStream = new Array(stringStream.length / 4);	
-	
+	var arrayStream = new Array(stringStream.length / 4);
+
 	for(var i = 0, j = 0, len = arrayStream.length; j < len; i += 4) {
 		arrayStream[j++] = [stringStream.charCodeAt(i) & 0xFF, stringStream.charCodeAt(i + 1) & 0xFF, stringStream.charCodeAt(i + 2) & 0xFF, stringStream.charCodeAt(i + 3) & 0xFF];
 	}
@@ -364,7 +364,7 @@ bitster.Long.Array.Stream.from.Long.String.Stream = function(stringStream) {
 //
 bitster.Raw.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
 	var string = '';
-	
+
 	for(var i = 0, len = arrayStream.length; i < len; ++i) {
 		string += String.fromCharCode(arrayStream[i] & 0xFF);
 	}
@@ -373,11 +373,13 @@ bitster.Raw.Byte.String.Stream.from.Byte.Array.Stream = function(arrayStream) {
 };
 
 bitster.Raw.Byte.Array.Stream.from.Byte.String.Stream = function(stringStream) {
-	var array = new Array(stringStream.length);	
-	
+	var array = new Array(stringStream.length);
+
 	for(var i = 0, len = array.length; i < len; ++i) {
 		array[i] = stringStream.charCodeAt(i) & 0xFF;
 	}
 
 	return array;
 };
+
+module.exports = bitster;
