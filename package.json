@@ -13,5 +13,7 @@
 		"mocha" : "*",
 		"chai" : "*"
 	},
-	"test" : "make test"
+	"scripts" : {
+		"test" : "make test"
+	},
 }
