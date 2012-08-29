@@ -1,7 +1,7 @@
 all: dist/bitster.js dist/bitster.min.js
 
 dist:
-	mkdir -p dist
+	@mkdir -p dist
 
 dist/bitster.js: dist src/bitster.js utils/generateNamespace.js
 	@echo "Building bitster.js"
@@ -12,7 +12,7 @@ dist/bitster.min.js: dist dist/bitster.js
 	cat dist/bitster.js | java -jar ~/closure-compiler/compiler.jar > dist/bitster.min.js
 
 clean:
-	rm -rf dist/
+	@rm -rf dist/
 
 test: dist/bitster.min.js
 	@./node_modules/mocha/bin/mocha --reporter spec -u tdd
